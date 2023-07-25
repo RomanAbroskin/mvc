@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <h1>Товары</h1>
+
+    <p th:if="${newTovar != null}" class="alert alert-success">
+        Добавлен товар [[${newTovar}]]
+    </p>
+
+    <p th:if="${updatedTovar != null}" class="alert alert-success">
+        товар обнавлен [[${updatedTovar}]]
+    </p>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Обнавить</th>
+            <th>ID</th>
+            <th>Имя товара</th>
+            <th>Артикул</th>
+            <th>Цена товара</th>
+            <th>Удалить</th>
+
+        </tr>
+        </thead>
+        <tbody class="table-danger">
+        <tr th:each="tovar: ${tovars}">
+            <td>
+                <a th:href="@{'/tovar/update/' + ${tovar.id}}" class="btn btn-info"> Обновить </a>
+            </td>
+            <td>[[${tovar.id}]]</td>
+            <td>
+                <a th:href="@{'/tovar/details/' + ${tovar.id}}"> [[${tovar.name}]] </a>
+            </td>
+            <td>[[${tovar.article}]]</td>
+            <td>[[${tovar.chena}]]</td>
+            <td>
+                <a th:href="@{'/tovar/delete/' + ${tovar.id}}" class="btn btn-danger"> Удалить </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>
+        <a th:href="@{/tovar/new}" class="btn btn-success"> Добавить товара </a>
+    </h3>
+    <h3>
+        <a th:href="@{/}"> На домашнюю </a>
+    </h3>
+</div>
+</body>
+</html>

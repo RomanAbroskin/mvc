@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OrdersMvcApp_Java225</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <h1>Клиенты</h1>
+    <!-- простой вывод -->
+    <!--        <th:block th:each="client: ${clients}">-->
+    <!--            &lt;!&ndash; client - очередной клиент коллекции clients &ndash;&gt;-->
+    <!--            <p>[[${client}]]</p>-->
+    <!--        </th:block>-->
+
+    <!-- если был добавлен клиент, то вывести сообщение об этом -->
+    <p th:if="${newClient != null}" class="alert alert-success">
+        Добавлен клиент [[${newClient}]]
+    </p>
+
+    <!-- если был обновлен клиент, то вывести сообщение об этом -->
+    <p th:if="${updatedClient != null}" class="alert alert-success">
+        Обновлен клиент [[${updatedClient}]]
+    </p>
+
+    <!-- вывести список объектов в виде таблицы -->
+    <table class="table table-bordered">
+        <!-- шапка таблицы -->
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <!-- тело таблицы -->
+        <tbody class="table-danger">
+        <tr th:each="client: ${clients}">
+            <td>[[${client.id}]]</td>
+            <td>
+                <a th:href="@{'/client/details/' + ${client.id}}"> [[${client.name}]] </a>
+            </td>
+            <td>[[${client.email}]]</td>
+            <td>
+                <a th:href="@{'/client/delete/' + ${client.id}}" class="btn btn-danger"> Удалить </a>
+                <a th:href="@{'/client/update/' + ${client.id}}" class="btn btn-info"> Обновить </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>
+        <!-- ссылка на добавление клиента -->
+        <a th:href="@{/client/new}" class="btn btn-success"> Добавить клиента </a>
+    </h3>
+    <h3>
+        <!-- ссылка на домашнюю страницу -->
+        <a th:href="@{/}"> На домашнюю </a>
+    </h3>
+</div>
+</body>
+</html>
